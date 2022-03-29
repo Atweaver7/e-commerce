@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
       }
     }
   )
-  .then(catData => res.json(catData))
+  .then(categoryData => res.json(categoryData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -32,8 +32,8 @@ router.get('/:id', (req, res) => {
         model: Product,
         attributes: ['category_id']
       }
-    }).then(catData => {
-      if (!catData) {
+    }).then(categoryData => {
+      if (!categoryData) {
         res.status(404).json({ message: 'No category with this ID found.'})
         return;
       }res.json(catData);
@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
   // create a new category
   Category.create({
     category_name: req.body.category_name
-  }).then(catData => res.json(catData))
+  }).then(categoryData => res.json(categoryData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -64,11 +64,11 @@ router.put('/:id', (req, res) => {
     where: {
       id: req.params.id
     }
-  }).then(catData => {
-    if (!catData) {
+  }).then(categoryData => {
+    if (!categoryData) {
       res.json(404).json({ message: 'No category available with this ID.'})
       return;
-    }res.json(catData);
+    }res.json(categoryData);
   }).catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -81,11 +81,11 @@ router.delete('/:id', (req, res) => {
     where: {
       id: req.params.id
     }
-  }).then(catData => {
-    if (!catData) {
+  }).then(categoryData => {
+    if (!categoryData) {
       res.status(404).json({ message: 'No category available with this ID'})
       return;
-    }res.json(catData);
+    }res.json(categoryData);
   }).catch(err => {
     console.log(err);
     res.status(500).json(err);
